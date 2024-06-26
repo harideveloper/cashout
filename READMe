@@ -1,0 +1,36 @@
+
+
+## PERFORMANCE FINETUNING
+
+
+1. Spanner Primary Key Design using composite index
+2. Secondary Index using Event/Timestamp 
+
+
+## QUERIES
+SELECT count(*) FROM Bets;
+SELECT * FROM Bets;
+
+SELECT EventID, COUNT(DISTINCT(EventID)) as EID FROM Bets GROUP BY EventID ORDER BY EID DESC;
+DELETE FROM Bets WHERE Status="open";
+
+
+SELECT EventID, COUNT(DISTINCT EventID) AS EventCount
+FROM Bets
+GROUP BY EventID;
+
+SELECT COUNT(*) FROM Bets WHERE EventID = "event_3" AND Odds = 3.9;
+
+SELECT EventID, COUNT(*) AS CountOfEvents
+FROM Bets
+GROUP BY EventID
+ORDER BY CountOfEvents DESC ;
+
+
+UPDATE Bets 
+SET Odds = 1.4
+WHERE UserID = "user_4511" ;
+
+SELECT * FROM Bets WHERE EventID = "event_3";
+
+SELECT * FROM Bets WHERE BetID LIKE 'bet_1719335008297%';

@@ -1,0 +1,28 @@
+
+{
+  "projectId": "hariprasad-sundaresan-0202",
+  "spanner": {
+    "instanceId": "bet-store-instance",
+    "databaseId": "bet-db"
+  },
+  "pubsub": {
+    "openbet": {
+      "topic" : "open-bet",
+      "subscription" : "open-bet-subscription"
+    },
+    "closebet": {
+      "topic" : "close-bet",
+      "subscription" : "close-bet-subscription"
+    },
+    "oddchange": {
+      "topic" : "odd-change",
+      "subscription" : "odd-change-subscription"
+    },
+    "notifyuser": {
+      "topic" : "notify-user",
+      "subscription" : "notify-user-subscription"
+    }
+  }
+}
+
+
