@@ -58,22 +58,49 @@ __pycache__/
 .yarn/install-state.gz
 
 # Ignore Service specific files
-services/open-bet/node_modules/
-services/close-bet/node_modules/
-services/odd-changes/node_modules/
-services/simulator/node_modules/
+services/spanner/open-bet/node_modules/
+services/spanner/close-bet/node_modules/
+services/spanner/odd-changes/node_modules/
+services/spanner/simulator/node_modules/
 
 # Ignore service-specific build directories
-services/open-bet/build/
-services/close-bet/build/
-services/odd-changes/build/
-services/simulator/build/
+services/spanner/open-bet/build/
+services/spanner/close-bet/build/
+services/spanner/odd-changes/build/
+services/spanner/simulator/build/
 
 # Ignore service-specific logs
-services/open-bet/logs/
-services/close-bet/logs/
-services/odd-changes/logs/
-services/simulator/logs/
+services/spanner/open-bet/logs/
+services/spanner/close-bet/logs/
+services/spanner/odd-changes/logs/
+services/spanner/simulator/logs/
+
+
+
+# Ignore Service specific files
+services/memorystore/open-bet/node_modules/
+services/memorystore/close-bet/node_modules/
+services/memorystore/odd-changes/node_modules/
+services/memorystore/bet-change/node_modules/
+services/memorystore/verifydb/node_modules/
+services/memorystore/simulator/node_modules/
+
+# Ignore service-specific build directories
+services/memorystore/open-bet/build/
+services/memorystore/close-bet/build/
+services/memorystore/odd-changes/build/
+services/memorystore/bet-change/build/
+services/memorystore/verifydb/build/
+services/memorystore/simulator/build/
+
+# Ignore service-specific logs
+services/memorystore/open-bet/logs/
+services/memorystore/close-bet/logs/
+services/memorystore/odd-changes/logs/
+services/memorystore/bet-change/logs/
+services/memorystore/verifydb/logs/
+services/memorystore/simulator/logs/
+
 
 # Ignore Terraform state and backup files in iac
 infra/terraform.tfstate
@@ -87,13 +114,18 @@ infra/*_override.tf
 infra/*_override.tf.json
 
 # Ignore .env files in services
-services/open-bet/.env
-services/close-bet/.env
-services/odd-changes/.env
-services/simulator/.env
+services/spanner/open-bet/.env
+services/spanner/close-bet/.env
+services/spanner/odd-changes/.env
+services/spanner/simulator/.env
 
-# Ignore Python virtual environments in services (if any)
-services/open-bet/venv/
-services/close-bet/venv/
-services/odd-changes/venv/
-services/simulator/venv/
+
+# Ignore .env files in services
+ervices/memorystore/open-bet/.env
+services/memorystore/close-bet/logs/.env
+services/memorystore/odd-changes/logs/.env
+services/memorystore/bet-change/logs/.env
+services/memorystore/verifydb/logs/.env
+services/memorystore/simulator/logs/.env
+
+

@@ -1,6 +1,6 @@
 const { Spanner } = require('@google-cloud/spanner');
 const { PubSub } = require('@google-cloud/pubsub');
-const config = require('./../config.json');
+const config = require('../../config.json')
 
 // Configuration
 const { projectId, spanner, pubsub } = config;

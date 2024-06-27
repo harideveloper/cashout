@@ -5,6 +5,12 @@
     "instanceId": "bet-store-instance",
     "databaseId": "bet-db"
   },
+  "redisConfig" : {
+    "host": "127.0.0.1",
+    "port": 6379,
+    "password":"password"
+  },
+
   "pubsub": {
     "openbet": {
       "topic" : "open-bet",
@@ -17,6 +23,10 @@
     "oddchange": {
       "topic" : "odd-change",
       "subscription" : "odd-change-subscription"
+    },
+    "betchange": {
+      "topic" : "bet-change",
+      "subscription" : "bet-change-subscription"
     },
     "notifyuser": {
       "topic" : "notify-user",

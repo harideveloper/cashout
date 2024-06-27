@@ -29,6 +29,16 @@ resource "google_pubsub_topic" "odd_change" {
   message_retention_duration = "600s"
 }
 
+resource "google_pubsub_topic" "bet_change" {
+  name = "bet-change"
+
+  labels = {
+    app = "cashout"
+  }
+
+  message_retention_duration = "600s"
+}
+
 resource "google_pubsub_topic" "notify_user" {
   name = "notify-user"
 
@@ -79,6 +89,25 @@ resource "google_pubsub_subscription" "close_bet_subscription" {
 resource "google_pubsub_subscription" "odd_change_subscription" {
   name  = "odd-change-subscription"
   topic = google_pubsub_topic.odd_change.name
+
+  labels = {
+    app = "cashout"
+  }
+
+  message_retention_duration = "600s"
+  retain_acked_messages      = true
+
+  retry_policy {
+    minimum_backoff = "10s"
+  }
+
+  enable_message_ordering = false
+}
+
+
+resource "google_pubsub_subscription" "bet_change_subscription" {
+  name  = "bet-change-subscription"
+  topic = google_pubsub_topic.bet_change.name
 
   labels = {
     app = "cashout"

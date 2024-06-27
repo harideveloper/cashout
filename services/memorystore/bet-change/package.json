@@ -1,0 +1,17 @@
+{
+  "name": "bet-change",
+  "version": "1.0.0",
+  "main": "betchange.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/pubsub": "^4.5.0",
+    "@google-cloud/spanner": "^7.9.0",
+    "redis": "^4.6.14"
+  },
+  "description": ""
+}
