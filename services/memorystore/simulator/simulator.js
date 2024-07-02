@@ -1,9 +1,41 @@
+require('dotenv').config();
+
 const { PubSub } = require('@google-cloud/pubsub');
 const { v4: uuidv4 } = require('uuid');
-const config = require('../../config.json');
 
-const { projectId, pubsub } = config;
-const { openbet, closebet, oddchange } = pubsub;
+// CONFIG VARIABLES
+
+const projectId = process.env.PROJECT_ID;
+const redisHost = process.env.REDIS_HOST;
+const redisPort = process.env.REDIS_PORT;
+
+
+// TOPIC
+const openBetTopic = process.env.TOPIC_OPEN_BET;
+const closeBetTopic = process.env.TOPIC_CLOSE_BET;
+const oddChangeTopic = process.env.TOPIC_ODD_CHANGE;
+
+
+// LOAD PARAMETERS
+const newBetsPerSecond = process.env.OPEN_BET_PER_SEC;
+const closedBetsPerSecond = process.env.CLOSE_BET_PER_SEC;
+const durationInSeconds = process.env.BET_DURATION;
+const oddsPerSecond = process.env.ODD_CHANGE_PER_SEC;
+const oddDurationInSeconds = process.env.ODD_DURATION;
+
+console.log(projectId)
+console.log(redisHost)
+
+console.log(openBetTopic)
+console.log(closeBetTopic)
+console.log(oddChangeTopic)
+
+console.log(newBetsPerSecond)
+console.log(closedBetsPerSecond)
+console.log(durationInSeconds)
+console.log(oddsPerSecond)
+console.log(oddDurationInSeconds)
+
 
 const pubSubClient = new PubSub({ projectId });
 
@@ -118,7 +150,7 @@ async function openBets(messagesPerSecond, durationInSeconds) {
       return;
     }
     const betData = generateOpenBets();
-    await publishMessage(openbet.topic, betData);
+    await publishMessage(openBetTopic, betData);
   }, interval);
 }
 
@@ -137,7 +169,7 @@ async function closedBets(messagesPerSecond, durationInSeconds) {
       return;
     }
     const closedBetData = generateClosedBets();
-    await publishMessage(closebet.topic, closedBetData);
+    await publishMessage(closeBetTopic, closedBetData);
   }, interval);
 }
 
@@ -156,7 +188,7 @@ async function oddChanges(messagesPerSecond, durationInSeconds) {
         return;
       }
       const oddChangesData = generateOddChanges();
-      await publishMessage(oddchange.topic, oddChangesData);
+      await publishMessage(oddChangeTopic, oddChangesData);
     }, interval);
   }
 
@@ -165,13 +197,13 @@ async function oddChanges(messagesPerSecond, durationInSeconds) {
 (async () => {
   const newBetsPerSecond = 5; // Open Bets per second 
   const closedBetsPerSecond = 5; // Close Bets per second 
-  const durationInSeconds = 5; // duration in seconds
+  const durationInSeconds = 1; // duration in seconds
 
   // Odds Changes
   const oddsPerSecond = 5; // Odd Changes  per second 
-  const oddDurationInSeconds = 5; // Odd Change duration in seconds
+  const oddDurationInSeconds = 1; // Odd Change duration in seconds
 
-  //await openBets(newBetsPerSecond, durationInSeconds);
-  //await closedBets(closedBetsPerSecond, durationInSeconds);
+  await openBets(newBetsPerSecond, durationInSeconds);
+  await closedBets(closedBetsPerSecond, durationInSeconds);
   await oddChanges(oddsPerSecond, oddDurationInSeconds);
 })();

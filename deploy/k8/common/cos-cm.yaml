@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cos-config
+data:
+  PROJECT_ID: hariprasad-sundaresan-0202
+  SPANNER_INSTANCE: bet-store-instance
+  SPANNER_DB: bet-db
+  REDIS_HOST: "10.178.65.155"
+  REDIS_PORT: "6379"
+  TOPIC_OPEN_BET: open-bet
+  SUBSCRIPTION_OPEN_BET: open-bet-subscription
+  TOPIC_CLOSE_BET: close-bet
+  SUBSCRIPTION_CLOSE_BET: close-bet-subscription
+  TOPIC_ODD_CHANGE: odd-change
+  SUBSCRIPTION_ODD_CHANGE: odd-change-subscription
+  TOPIC_BET_CHANGE: bet-change
+  SUBSCRIPTION_BET_CHANGE: bet-change-subscription
+  TOPIC_NOTIFY_USER: notify-user
+  SUBSCRIPTION_NOTIFY_USER: notify-user-subscription

@@ -58,8 +58,8 @@ function generateOddChanges() {
     return {
       eventID: `${r_event}`,
       odds: r_odds,
-    //   eventID: "67",
-    //   odds: 5.5,
+      // eventID: "53",
+      // odds: 5.5,
     };
   }
 
@@ -122,13 +122,13 @@ async function oddChanges(messagesPerSecond, durationInSeconds) {
 
 // Start simulations
 (async () => {
-  const newBetsPerSecond = 50; // Open Bets per second 
-  const closedBetsPerSecond = 50; // Close Bets per second 
-  const durationInSeconds = 10; // duration in seconds
+  const newBetsPerSecond = 1000; // Open Bets per second 
+  const closedBetsPerSecond = 1000; // Close Bets per second 
+  const durationInSeconds = 1; // duration in seconds
 
   // Odds Changes
-  const oddsPerSecond = 50; // Odd Changes  per second 
-  const oddDurationInSeconds = 10; // Odd Change duration in seconds
+  const oddsPerSecond = 1000; // Odd Changes  per second 
+  const oddDurationInSeconds = 1; // Odd Change duration in seconds
 
   await openBets(newBetsPerSecond, durationInSeconds);
   await closedBets(closedBetsPerSecond, durationInSeconds);

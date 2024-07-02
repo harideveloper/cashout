@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: close-bet-deployment
+  labels:
+    app: close-bet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: close-bet
+  template:
+    metadata:
+      labels:
+        app: close-bet
+    spec:
+      containers:
+      - name: close-bet
+        image: hari5115/close-bet:0.0.1
+        ports:
+        - containerPort: 8080
+        env:
+        - name: PROJECT_ID
+          valueFrom:
+            configMapKeyRef:
+              name: cos-config
+              key: PROJECT_ID
+        - name: REDIS_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: cos-config
+              key: REDIS_HOST
+        - name: REDIS_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: cos-config
+              key: REDIS_PORT
+        - name: SUBSCRIPTION_CLOSE_BET
+          valueFrom:
+            configMapKeyRef:
+              name: cos-config
+              key: SUBSCRIPTION_CLOSE_BET
+

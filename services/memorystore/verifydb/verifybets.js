@@ -29,10 +29,10 @@ async function checkAllBets() {
         const betData = JSON.parse(value);
   
         // Process each bet data (you can log it or perform other operations)
-        console.log(`Found bet in Redis: Bet ID ${betData.compositeId}, Data:`, betData);
+        //console.log(`Found bet in Redis: Bet ID ${betData.compositeId}, Data:`, betData);
       }
   
-      console.log(`Checked all bets in Redis. Total bets: ${keys.length}`);
+      console.log(`Total bets store in redis: ${keys.length}`);
     } catch (error) {
       console.error('Error checking bets in Redis:', error);
     } finally {

@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: open-bet-deployment
+  labels:
+    app: open-bet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: open-bet
+  template:
+    metadata:
+      labels:
+        app: open-bet
+    spec:
+      containers:
+      - name: open-bet
+        image: hari5115/open-bet:0.0.4
+        ports:
+        - containerPort: 8080
+        env:
+        - name: PROJECT_ID
+          valueFrom:
+            configMapKeyRef:
+              name: cos-config
+              key: PROJECT_ID
+        - name: REDIS_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: cos-config
+              key: REDIS_HOST
+        - name: REDIS_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: cos-config
+              key: REDIS_PORT
+        - name: SUBSCRIPTION_OPEN_BET
+          valueFrom:
+            configMapKeyRef:
+              name: cos-config
+              key: SUBSCRIPTION_OPEN_BET
+

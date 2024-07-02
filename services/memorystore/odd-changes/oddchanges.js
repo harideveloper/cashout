@@ -1,18 +1,32 @@
+require('dotenv').config();
+
 const { PubSub } = require('@google-cloud/pubsub');
 const redis = require('redis');
-const config = require('../../config.json');
 
-// Configuration
-const { projectId, pubsub, redisConfig } = config;
-const { oddchange, betchange } = pubsub;
+
+// Validate environment variables
+function validate(envVar, envVarName) {
+  if (!envVar || envVar.trim() === '') {
+    throw new Error(`Environment variable ${envVarName} is missing or empty.`);
+  }
+  return envVar;
+}
+
+// Declare Env Variables
+const projectId = validate(process.env.PROJECT_ID, 'PROJECT_ID');
+const pubsubSubscription = validate(process.env.SUBSCRIPTION_ODD_CHANGE, 'SUBSCRIPTION_ODD_CHANGE');
+const redisHost = validate(process.env.REDIS_HOST, 'REDIS_HOST');
+const redisPort = validate(process.env.REDIS_PORT, 'REDIS_PORT');
+const betChangeTopic = validate(process.env.TOPIC_BET_CHANGE, 'TOPIC_BET_CHANGE');
+
 
 // Create a Pub/Sub client
 const pubSubClient = new PubSub({ projectId });
 
 // Create a Redis client
 const redisClient = redis.createClient({
-  host: redisConfig.host,  // Redis forwarder VM external IP
-  port: redisConfig.port,
+  host: redisHost, 
+  port: redisPort,
 });
 
 // Function to publish a message to a Pub/Sub topic
@@ -32,7 +46,7 @@ async function oddChanges() {
     await redisClient.connect();
 
     // Create a subscription object for odds changes
-    const subscription = pubSubClient.subscription(oddchange.subscription);
+    const subscription = pubSubClient.subscription(pubsubSubscription);
 
     // Listen for messages on the subscription
     subscription.on('message', async message => {
@@ -63,7 +77,7 @@ async function oddChanges() {
             algorithm: betData.algorithm
           };
 
-          await publishMessage(betchange.topic, betChange);
+          await publishMessage(betChangeTopic, betChange);
           
         }
       } catch (error) {
